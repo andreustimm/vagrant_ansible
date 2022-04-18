@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: true
+  roles:
+    - update
+
+- hosts: banco
+  become: true
+  roles:
+    - update
+
