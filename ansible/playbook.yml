@@ -3,14 +3,18 @@
   become: true
   roles:
     - update
+    - tools
     - mariadb-install
     - mariadb-config
+    #- ufw-db
 
 - hosts: web
   become: true
   roles:
     - update
+    - tools
     - apache
-    - apache-config
     - php7.4
+    - apache-config
     - wordpress
+    #- ufw-web

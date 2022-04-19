@@ -2,16 +2,17 @@
 - name: "Criando banco de dados para o wordpress"
   community.mysql.mysql_db:
     name: wordpress_db
-    login_user: root
+    login_host: root
     login_password: { mysql_root_password }
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     state: present
-  
+
+
 - name: "Criando usuario para o mysql wordpress"
   community.mysql.mysql_user:
-    login_user: root
-    login_password: { mysql_root_password }
-    name: { mysql_user_name }
-    password: { mysql_user_password }
-    priv: { mysql_user_priv }
+    name: "{{ mysql_user_name }}"
+    password: "{{ mysql_user_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    priv: 'wordpress_db.*:ALL'
     state: present
   

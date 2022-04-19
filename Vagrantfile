@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   $provision_install = <<-SCRIPT
     sudo apt update && \
-    sudo apt install vim ansible openssh-server -y
+    sudo apt install ansible -y
   SCRIPT
 
   config.vm.define "web" do |web|
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     web.vm.network "public_network",ip: "192.168.0.31"
     web.vm.provision "shell", inline: $provision_install
     web.vm.provision :ansible do |ansible|
-      ansible.playbook = "ansible/lamp.yml"
+      ansible.playbook = "ansible/playbook.yml"
     end
   end
 
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     banco.vm.network "public_network",ip: "192.168.0.51"
     banco.vm.provision "shell", inline: $provision_install
     banco.vm.provision :ansible do |ansible|
-      ansible.playbook = "ansible/lamp.yml"
+      ansible.playbook = "ansible/playbook.yml"
     end
   end
 end

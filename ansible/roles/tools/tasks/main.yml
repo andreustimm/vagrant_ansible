@@ -1,0 +1,7 @@
+---
+- name: Instalando Ferramentas
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  loop: "{{ tool_packages }}"

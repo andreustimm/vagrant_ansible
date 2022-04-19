@@ -1,0 +1,13 @@
+---
+tool_packages:
+  - sudo
+  - vim
+  - openssh-server
+  - mariadb-client
+  - net-tools
+  - curl
+  - apt-transport-https
+  - lsb-release
+  - ca-certificates
+  - python3-pip
+  - ufw

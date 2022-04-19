@@ -1,0 +1,14 @@
+- name: Habilitando UFW na Inicialização
+  service:
+    name: ufw
+    enabled: yes
+
+- name: Liberar acesso as portas do Firewall
+  community.general.ufw:
+    rule: allow
+    port: "{{ item }}"
+    src: 192.168.0.0/24
+    proto: tcp
+    state: enabled
+    log: yes
+  loop: "{{ ufw_ports }}"
