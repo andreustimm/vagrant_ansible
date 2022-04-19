@@ -1,11 +1,16 @@
 ---
-- hosts: web
-  become: true
-  roles:
-    - update
-
 - hosts: banco
   become: true
   roles:
     - update
+    - mariadb-install
+    - mariadb-config
 
+- hosts: web
+  become: true
+  roles:
+    - update
+    - apache
+    - apache-config
+    - php7.4
+    - wordpress

@@ -1,0 +1,7 @@
+---
+- name: Instalando PHP 7.4
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  loop: "{{ php_packages }}"

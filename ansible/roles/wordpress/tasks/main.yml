@@ -1,0 +1,45 @@
+---
+- name: "Download arquivo do wordpress"
+  get_url:
+    url: 'http://wordpress.org/latest.tar.gz'
+    dest: '/tmp/wordpress.tar.gz'
+    
+- name: "Descompactar o arquivo"
+  unarchive:
+    src: '/tmp/wordpress.tar.gz'
+    dest: /var/www
+    remote_src: yes
+  
+- copy:
+    src: '/var/www/wordpress/wp-config-sample.php'
+    dest: '/var/www/wordpress/wp-config.php'
+    remote_src: yes
+
+- name: "Configurando o arquivo wp-config com as entradas do banco de dados"
+  replace:
+    path: '/var/www/wordpress/wp-config.php'
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.value }}"
+    backup: yes
+  with_items:
+    - { regex: 'database_name_here', value: 'wordpress_db' }
+    - { regex: 'username_here', value: 'wordpress_user' }
+    - { regex: 'password_here', value: '#S3nh@F0rt3#' }
+    - { regex: 'localhost', value: '192.168.0.51' }
+    #- { regex: 'database_name_here', value: { mysql_user_db } }
+    #- { regex: 'username_here', value: { mysql_user_user } }
+    #- { regex: 'password_here', value: { mysql_user_password } }
+    #- { regex: 'localhost', value: { mysql_user_host } }
+  
+- name: "Configurando o arquivo apache2"
+  replace:
+    path: '/etc/apache2/sites-available/000-default.conf'
+    regexp: "{{ item.regex }}"
+    replace: "{{ item.value }}"
+    backup: yes
+  with_items:
+    - { regex: '/var/www/html', value: '/var/www/wordpress' }
+  notify:
+    - Restart Apache
+    - Restart PHP7.4-FPM
+

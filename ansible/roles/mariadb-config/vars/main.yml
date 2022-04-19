@@ -1,0 +1,6 @@
+---
+mysql_user_db: "wordpress_db"
+mysql_user_name: "wordpress_user"
+mysql_user_password: "#S3nh@F0rt3#"
+mysql_user_priv: "wordpress_db.*:ALL"
+mysql_root_password: "#M4h0ut2021#"

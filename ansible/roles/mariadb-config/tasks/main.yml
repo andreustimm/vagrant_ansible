@@ -1,0 +1,17 @@
+---
+- name: "Criando banco de dados para o wordpress"
+  community.mysql.mysql_db:
+    name: wordpress_db
+    login_user: root
+    login_password: { mysql_root_password }
+    state: present
+  
+- name: "Criando usuario para o mysql wordpress"
+  community.mysql.mysql_user:
+    login_user: root
+    login_password: { mysql_root_password }
+    name: { mysql_user_name }
+    password: { mysql_user_password }
+    priv: { mysql_user_priv }
+    state: present
+  

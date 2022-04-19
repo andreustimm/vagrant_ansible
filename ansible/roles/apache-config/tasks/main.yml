@@ -1,0 +1,59 @@
+---
+## Habilitando módulos Apache2
+- name: Habilitando config PHP7.4-FPM no Apache 2
+  ansible.builtin.file:
+    src: ../conf-available/php7.4-fpm.conf
+    dest: /etc/apache2/conf-enabled/php7.4-fpm.conf
+    owner: root
+    group: root
+    state: link
+  notify:
+    - Restart Apache
+    - Restart PHP7.4-FPM
+
+- name: Habilitando módulos Apache 2
+  ansible.builtin.file:
+    src: "../mods-available/{{item}}"
+    dest: "/etc/apache2/mods-enabled/{{item}}"
+    owner: root
+    group: root
+    state: link
+  loop: "{{ apache2_modules }}"
+  notify:
+    - Restart Apache
+    - Restart PHP7.4-FPM
+
+## Hosts Apache
+- name: Copiando Virtual Hosts Apache
+  ansible.builtin.copy:
+    src: "{{item}}.conf"
+    dest: "/etc/apache2/sites-available/{{item}}.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  loop: "{{ apache2_hosts }}"
+  notify:
+    - Restart Apache
+    - Restart PHP7.4-FPM
+
+- name: Habilitando Virtual Hosts Apache
+  ansible.builtin.file:
+    src: "../sites-available/{{item}}.conf"
+    dest: "/etc/apache2/sites-enabled/{{item}}.conf"
+    owner: root
+    group: root
+    state: link
+  loop: "{{ apache2_hosts }}"
+  notify:
+    - Restart Apache
+    - Restart PHP7.4-FPM
+
+# Default
+##- name: Desabilitando Virtual Host Apache 'Padrão'
+##  ansible.builtin.file:
+##    path: /etc/apache2/sites-enabled/000-default.conf
+##    state: absent
+##  notify:
+##    - Restart Apache
+##    - Restart PHP7.4-FPM
+

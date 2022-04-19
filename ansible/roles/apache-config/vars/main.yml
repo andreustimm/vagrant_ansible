@@ -1,0 +1,44 @@
+---
+apache2_hosts:
+  - wordpress.mahout.com.br
+
+apache2_modules:
+  - access_compat.load
+  - actions.conf
+  - actions.load
+  - alias.conf
+  - alias.load
+  - auth_basic.load
+  - authn_core.load
+  - authn_file.load
+  - authz_core.load
+  - authz_host.load
+  - authz_user.load
+  - autoindex.conf
+  - autoindex.load
+  - deflate.conf
+  - deflate.load
+  - dir.conf
+  - dir.load
+  - env.load
+  - expires.load
+  - filter.load
+  - headers.load
+  - mime.conf
+  - mime.load
+  - mpm_prefork.conf
+  - mpm_prefork.load
+  - negotiation.conf
+  - negotiation.load
+  - proxy.conf
+  - proxy_fcgi.load
+  - proxy_http.load
+  - proxy.load
+  - reqtimeout.conf
+  - reqtimeout.load
+  - rewrite.load
+  - setenvif.conf
+  - setenvif.load
+  - socache_shmcb.load
+  - status.conf
+  - status.load

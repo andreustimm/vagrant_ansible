@@ -1,0 +1,38 @@
+---
+- name: Instalando MariaDB
+  apt:
+    name: mariadb-server
+    state: latest
+
+- name: Habilitando MariaDB na Inicialização
+  service:
+    name: mariadb
+    enabled: yes
+
+- name: Instalando dependências MariaDB
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  loop: "{{ python_packages }}"
+
+#- name: Grava senha do Root
+#  community.mysql.mysql_user:
+#    name: root
+#    login_password: { mysql_root_password }
+#    password: { mysql_root_password }
+#    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Remove todos usuários anônimos
+  community.mysql.mysql_user:
+    name: ''
+    state: absent
+    login_user: root
+#    login_password: { mysql_root_password }
+
+- name: Remove banco de dados de teste
+  community.mysql.mysql_db:
+    name: test
+    state: absent
+    login_user: root
+#    login_password: { mysql_root_password }
