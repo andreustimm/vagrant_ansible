@@ -1,15 +1,15 @@
 ---
 ## Habilitando módulos Apache2
-- name: Habilitando config PHP7.4-FPM no Apache 2
+- name: Habilitando config PHP8.2-FPM no Apache 2
   ansible.builtin.file:
-    src: ../conf-available/php7.4-fpm.conf
-    dest: /etc/apache2/conf-enabled/php7.4-fpm.conf
+    src: ../conf-available/php8.2-fpm.conf
+    dest: /etc/apache2/conf-enabled/php8.2-fpm.conf
     owner: root
     group: root
     state: link
   notify:
     - Restart Apache
-    - Restart PHP7.4-FPM
+    - Restart PHP8.2-FPM
 
 - name: Habilitando módulos Apache 2
   ansible.builtin.file:
@@ -21,7 +21,7 @@
   loop: "{{ apache2_modules }}"
   notify:
     - Restart Apache
-    - Restart PHP7.4-FPM
+    - Restart PHP8.2-FPM
 
 ## Hosts Apache
 - name: Copiando Virtual Hosts Apache
@@ -34,7 +34,7 @@
   loop: "{{ apache2_hosts }}"
   notify:
     - Restart Apache
-    - Restart PHP7.4-FPM
+    - Restart PHP8.2-FPM
 
 - name: Habilitando Virtual Hosts Apache
   ansible.builtin.file:
@@ -46,7 +46,7 @@
   loop: "{{ apache2_hosts }}"
   notify:
     - Restart Apache
-    - Restart PHP7.4-FPM
+    - Restart PHP8.2-FPM
 
 # Default
 ##- name: Desabilitando Virtual Host Apache 'Padrão'
@@ -55,5 +55,5 @@
 ##    state: absent
 ##  notify:
 ##    - Restart Apache
-##    - Restart PHP7.4-FPM
+##    - Restart PHP8.2-FPM
 

@@ -8,4 +8,3 @@
   service:
     name: apache2
     enabled: yes
-

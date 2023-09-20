@@ -1,5 +1,5 @@
 ---
-- name: Instalando PHP 7.4
+- name: Instalando PHP 8.2
   apt:
     name: "{{ item }}"
     update_cache: yes

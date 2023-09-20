@@ -25,7 +25,7 @@
     - { regex: 'database_name_here', value: 'wordpress_db' }
     - { regex: 'username_here', value: 'wordpress_user' }
     - { regex: 'password_here', value: '#S3nh@F0rt3#' }
-    - { regex: 'localhost', value: '192.168.0.51' }
+    - { regex: 'localhost', value: '192.168.50.51' }
     #- { regex: 'database_name_here', value: { mysql_user_db } }
     #- { regex: 'username_here', value: { mysql_user_user } }
     #- { regex: 'password_here', value: { mysql_user_password } }
@@ -41,5 +41,5 @@
     - { regex: '/var/www/html', value: '/var/www/wordpress' }
   notify:
     - Restart Apache
-    - Restart PHP7.4-FPM
+    - Restart PHP8.2-FPM
 

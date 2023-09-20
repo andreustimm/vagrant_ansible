@@ -14,7 +14,7 @@
     - update
     - tools
     - apache
-    - php7.4
+    - php8.2
     - apache-config
     - wordpress
     #- ufw-web
